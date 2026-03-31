@@ -5,3 +5,6 @@
 #include<errno.h>
 #include<sys/wait.h>
 #include<signal.h>
+
+
+void logs_file(char** );

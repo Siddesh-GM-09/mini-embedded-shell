@@ -19,6 +19,7 @@ int main(){
 		if(args[0]==NULL){
 			continue;
 		}
+		logs_file(args);
 		if(strcmp(args[0],"exit")==0){
 			printf("exiting shell...\n");
 			return 0;
