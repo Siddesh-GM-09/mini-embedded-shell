@@ -1,4 +1,4 @@
-target=main.o log.o
+target=main.o log.o 
 CC=gcc
 my_shell:$(target)
 	$(CC) $(target) -o my_shell
