@@ -1,0 +1,3 @@
+compile like this : 
+ $gcc program.c mathlib.a  //For Static Linking
+ $gcc program.c ./mathlib.so  //For Dynamic Linking
