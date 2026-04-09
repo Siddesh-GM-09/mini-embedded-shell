@@ -1,0 +1,41 @@
+#Compile like this for library linking: 
+-----------------------------------------------------
+ $gcc program.c mathlib.a  //For Static Linking
+ 
+ $gcc program.c ./mathlib.so  //For Dynamic Linking
+
+=================================================================================
+
+#my_ls(1) — utility to list files and directory information
+------------------------------------------------------------
+USAGE : 
+ $ my_ls     //List files in the present working directory
+
+ $ my_ls -l  //Display files in long format (permissions, links, owner, group, size, modified time, name)
+
+ $ my_ls -i    //Display inode number of each file
+
+ $ my_ls -s   //Display size (in blocks) of each file
+ 
+ $ my_ls -a   //Display all files including hidden files (files starting with '.')
+ 
+ $ my_ls -la  // Display all files including hidden files in long format
+
+ $ my_ls -li  // Display inode number along with long format details
+
+ $ my_ls -ls  // Display size along with long format details
+
+=================================================================================
+
+# my_ps(1) — display processes running on a specific terminal
+-------------------------------------------------------------
+my_ps — list processes associated with a given terminal
+
+USAGE : $my_ps terminal_number
+
+DESCRIPTION :
+	The my_ps command displays information about processes running on a specified terminal.
+	It is a custom implementation inspired by the Linux ps command.
+	The program filters processes based on the given terminal number and lists only
+	those processes that are currently associated with that terminal.
+	This command internally mimics the behavior of: ps -e | grep <terminal_number>
