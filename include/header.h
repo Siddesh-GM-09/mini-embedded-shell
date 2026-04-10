@@ -13,6 +13,7 @@
 #include <fcntl.h>              /* Definition of O_* constants */
 #include <unistd.h>
 void logs_file(char** );
-void list(char *,char *);
-
-
+void handle_pipe(char*);
+void my_ls(char **args);
+void list(char *fpath, char *mode);
+void print(int n);

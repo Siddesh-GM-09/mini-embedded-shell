@@ -1,0 +1,4 @@
+ls 
+my_ls 
+my_ls -a 
+clear 
