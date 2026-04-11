@@ -27,12 +27,7 @@ int main(){
 		//Prase into tokens
 		memset(args, 0, sizeof(args));
 		int i = 0;
-		char *token = strtok(cmd, " ");
-		while(token != NULL){
-			args[i++] = token;
-			token = strtok(NULL, " ");
-		}
-		args[i] = NULL;
+		parse_input(cmd,args); //command Parser
 		//No Input
 		if(args[0] == NULL){
 			continue;
@@ -52,14 +47,24 @@ int main(){
 			printf("exiting shell...\n");
 			break;
 		}
+		//input and output redirection Handling 
+		if(strchr(cmd_copy,'>') || strchr(cmd_copy,'<')){
+			handle_redirection(cmd_copy);
+			continue;
+		}
 		//PIPE Handling
 		if(strchr(cmd_copy, '|')){
 			handle_pipe(cmd_copy);   // implemented in pipe.c
 			continue;
 		}
-		//my_ls is mimics the ls
+		//my_ls :  mimics the ls
 		if(strcmp(args[0], "my_ls") == 0){
 			my_ls(args);
+			continue;
+		}
+		//my_ps : mimics the ps 
+		if(strcmp(args[0],"my_ps")==0){
+			my_ps(args);
 			continue;
 		}
 		//Logs

@@ -1,10 +1,6 @@
 #include "header.h"
 
-// 🔹 forward declarations
-void list(char *fpath, char *mode);
-void print(int n);
-
-// 🔹 main function for shell
+// main function for shell
 void my_ls(char **args)
 {
     int argc = 0;
@@ -31,7 +27,7 @@ void my_ls(char **args)
     }
 }
 
-// 🔹 list function
+// list function
 void list(char *fpath, char *mode)
 {
     struct stat v;
@@ -62,15 +58,15 @@ void list(char *fpath, char *mode)
                 continue;
         }
 
-        // 🔹 inode
+        //  inode
         if(mode && strchr(mode, 'i'))
             printf("%-6lu ", (unsigned long)p->d_ino);
 
-        // 🔹 blocks
+        //  blocks
         if(mode && strchr(mode, 's'))
             printf("%4ld ", (long)v.st_blocks/2);
 
-        // 🔹 long listing
+        //  long listing
         if(mode && strchr(mode, 'l'))
         {
             // file type
@@ -99,7 +95,7 @@ void list(char *fpath, char *mode)
     closedir(dp);
 }
 
-// 🔹 permission printer
+// permission printer
 void print(int n)
 {
     for(int i = 8; i >= 0; i--)

@@ -1,5 +1,5 @@
-//$ ps -e | grep terminal_no
 #include "header.h"
+
 void handle_pipe(char *cmd){
 	char *left = strtok(cmd, "|");
 	char *right = strtok(NULL, "|");
@@ -16,7 +16,7 @@ void handle_pipe(char *cmd){
 		token = strtok(NULL, " ");
 	}
 	args1[i] = NULL;
-	// 🔹 parse right command
+	//parse right command
 	char *args2[50];
 	i = 0;
 	token = strtok(right, " ");
@@ -27,30 +27,55 @@ void handle_pipe(char *cmd){
 	args2[i] = NULL;
 
 	int P[2];
-	if(pipe(P)==-1){
-		perror("Pipe");
+	if(pipe(P) == -1){
+		perror("pipe");
+		return;
+	}
+
+	// first child (left command)
+	if(fork() == 0){
+		close(P[0]);              // close read end
+		dup2(P[1], 1);            // stdout → pipe
+		close(P[1]);              // close original FD
+		//Handles Built In commands
+		if(strcmp(args1[0],"my_ps")==0){
+			my_ps(args1);
+			exit(0);
+		}
+		if(strcmp(args1[0],"my_ls")==0){
+			my_ls(args1);
+			exit(0);
+		}
+		if(execvp(args1[0], args1)==-1){
+			perror("execvp left");
+		}
 		exit(1);
 	}
-	char *pipe_pos = strchr(cmd, '|');
-	//first child,left command
-	if(fork()==0){            
-		close(P[0]);
-		dup2(P[1],1);
-		execvp(args1[0],args1);
-		perror("execvp left");
+
+	//second child (right command)
+	if(fork() == 0){
+		close(P[1]);              // close write end
+		dup2(P[0], 0);            // stdin ← pipe
+		close(P[0]);              // close original FD
+		//Handles Built In commands
+		if(strcmp(args2[0],"my_ps")==0){
+			my_ps(args2);
+			exit(0);
+		}
+		if(strcmp(args2[0],"my_ls")==0){
+			my_ls(args2);
+			exit(0);
+		}
+		if(execvp(args2[0], args2)==-1){
+			perror("execvp right");
+		}
 		exit(1);
 	}
-	//second child,right command
-	if(fork()==0){    
-		close(P[1]);
-		dup2(P[0],0);
-		execvp(args2[0],args2);
-		perror("execvp right");
-		exit(1);
-	}
+
+	// parent
 	close(P[0]);
 	close(P[1]);
+
 	wait(NULL);
 	wait(NULL);
 }
-

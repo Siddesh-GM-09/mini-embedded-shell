@@ -1,4 +1,4 @@
-target=src/main.o src/log.o src/builtins.o src/execute.o src/parser.o src/pipe.o src/redirect.o src/my_ls.o
+target=src/main.o src/log.o src/builtins.o src/execute.o src/parser.o src/pipe.o src/redirect.o src/my_ls.o src/my_ps.o
 
 CC=gcc
 
@@ -28,7 +28,14 @@ src/redirect.o: src/redirect.c
 
 src/my_ls.o: src/my_ls.c
 	$(CC) -c src/my_ls.c -o src/my_ls.o -Iinclude -Ilib/include
-
+src/my_ps.o: src/my_ps.c
+	$(CC) -c  src/my_ps.c -o src/my_ps.o -Iinclude -Ilib/include
 clean:
 	@echo "cleaning Object files..."
 	@rm -f src/*.o bin/myshell
+
+setup:
+	@echo "Adding myshell to PATH..."
+	@echo 'export PATH=$$PATH:$(PWD)/bin' >> ~/.bashrc
+	@echo "Done. Restart terminal or run: source ~/.bashrc"
+

@@ -10,10 +10,13 @@
 #include<sys/stat.h>
 #include<dirent.h>
 #include<time.h>
-#include <fcntl.h>              /* Definition of O_* constants */
+#include <fcntl.h>           
 #include <unistd.h>
 void logs_file(char** );
 void handle_pipe(char*);
 void my_ls(char **args);
 void list(char *fpath, char *mode);
 void print(int n);
+void handle_redirection(char *);
+void my_ps(char**);
+void parse_input(char*,char**);
