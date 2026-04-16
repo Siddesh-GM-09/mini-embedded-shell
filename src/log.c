@@ -1,12 +1,16 @@
 #include "header.h"
 void logs_file(char** cmd){
-	FILE* fp=fopen(".log.txt","a+");
+	int fd=open(".log.txt",O_RDWR|O_CREAT|O_APPEND,0664);
+	if(fd<0){
+		perror("Open");
+		return;
+	}
 	register int i=0;
 	while(cmd[i]!=NULL){
-		fprintf(fp,"%s ",cmd[i]);
+		write(fd,cmd[i],strlen(cmd[i]));
+		write(fd," ",1);
 		i++;
 	}
-	fprintf(fp,"\n");
-	fclose(fp);
-	fp=NULL;
+	write(fd,"\n",1);
+	close(fd);
 }
