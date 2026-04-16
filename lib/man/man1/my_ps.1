@@ -1,0 +1,43 @@
+.TH MY_PS 1 "April 2026" "Version 1.0" "User Commands"
+
+.SH NAME
+my_ps \- display processes running on a specific terminal
+
+.SH SYNOPSIS
+.B my_ps
+terminal_number
+
+.SH DESCRIPTION
+The
+.B my_ps
+command displays information about processes associated with a given terminal.
+
+It is a custom implementation inspired by the Linux
+.B ps
+command.
+
+The program filters processes based on the specified terminal number and displays
+only those processes currently running on that terminal.
+
+Internally, it mimics the behavior of:
+.B ps -e | grep <terminal_number>
+
+.SH ARGUMENTS
+.TP
+.B terminal_number
+The terminal identifier (e.g., pts/0, pts/1).
+
+.SH EXAMPLES
+.TP
+.B my_ps pts/0
+Display processes running on terminal pts/0.
+
+.TP
+.B my_ps pts/1
+Display processes running on terminal pts/1.
+
+.SH AUTHOR
+Written by Siddesh G M.
+
+.SH SEE ALSO
+ps(1), grep(1)

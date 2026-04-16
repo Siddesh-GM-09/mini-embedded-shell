@@ -35,7 +35,9 @@ clean:
 	@rm -f src/*.o bin/myshell
 
 setup:
-	@echo "Adding myshell to PATH..."
-	@echo 'export PATH=$$PATH:$(PWD)/bin' >> ~/.bashrc
-	@echo "Done. Restart terminal or run: source ~/.bashrc"
-
+	@echo "Configuring environment..."
+	@grep -qxF 'export PATH=$$PATH:$(PWD)/bin' ~/.bashrc || \
+	echo 'export PATH=$$PATH:$(PWD)/bin' >> ~/.bashrc
+	@grep -qxF 'export MANPATH=$(PWD)/lib/man:$$MANPATH' ~/.bashrc || \
+	echo 'export MANPATH=$(PWD)/lib/man:$$MANPATH' >> ~/.bashrc
+	@echo "Done. Run: source ~/.bashrc"

@@ -1,0 +1,66 @@
+.TH MY_LS 1 "April 2026" "Version 1.0" "User Commands"
+
+.SH NAME
+my_ls \- list directory contents (custom implementation)
+
+.SH SYNOPSIS
+.B my_ls
+[\-l] [\-i] [\-s] [\-a]
+
+.SH DESCRIPTION
+The
+.B my_ls
+utility lists information about files and directories in the current working directory.
+
+It is a custom implementation similar to the Linux
+.B ls
+command.
+
+.SH OPTIONS
+.TP
+.B \-l
+Display files in long format including permissions, number of links, owner, group, size, modification time, and name.
+
+.TP
+.B \-i
+Display the inode number of each file.
+
+.TP
+.B \-s
+Display the size (in blocks) of each file.
+
+.TP
+.B \-a
+Display all files including hidden files (those starting with '.').
+
+.SH COMBINED OPTIONS
+.TP
+.B \-la
+Display all files in long format.
+
+.TP
+.B \-li
+Display inode number along with long format.
+
+.TP
+.B \-ls
+Display size along with long format.
+
+.SH EXAMPLES
+.TP
+.B my_ls
+List files in current directory.
+
+.TP
+.B my_ls \-l
+List files in long format.
+
+.TP
+.B my_ls \-a
+List all files including hidden files.
+
+.SH AUTHOR
+Written by Siddesh G M.
+
+.SH SEE ALSO
+ls(1)

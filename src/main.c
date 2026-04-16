@@ -26,7 +26,6 @@ int main(){
 		strcpy(cmd_copy, cmd);
 		//Prase into tokens
 		memset(args, 0, sizeof(args));
-		int i = 0;
 		parse_input(cmd,args); //command Parser
 		//No Input
 		if(args[0] == NULL){
